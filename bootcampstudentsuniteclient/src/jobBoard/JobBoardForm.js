@@ -4,10 +4,10 @@ import { useHistory } from "react-router-dom";
 
 export const JobBoardForm = (props) => {
   const history = useHistory();
-  const { createJobBoard, updateJobBoard, getJobBoards, groupProjects } =
+  const { createJobBoard, updateJobBoard, getJobBoards, jobBoards } =
     useContext(JobBoardContext);
 
-  const [groupProjectState, setJobBoard] = useState({});
+  const [jobBoardState, setJobBoard] = useState({});
   /*
     Since the input fields are bound to the values of
     the properties of this state variable, you need to
@@ -15,35 +15,30 @@ export const JobBoardForm = (props) => {
     */
   const [currentJobBoard, setCurrentJobBoard] = useState({
     title: "",
-    numberOfGraduatesSignedUp: "",
     description: "",
-    estimatedTimeToCompletion: "",
-    gitHubLink: "",
-    project_manager: localStorage.getItem("lu_token"),
+    jobLink: "",
+    poster: localStorage.getItem("lu_token"),
   });
-  console.log(props);
-  const editMode = props.match.params.hasOwnProperty("groupProjectId");
+  const editMode = props.match.params.hasOwnProperty("jobBoardId");
 
   const getJobBoardInEditMode = () => {
     if (editMode) {
-      const groupProjectId = parseInt(props.match.params.groupProjectId);
-      const selectedJobBoard =
-        groupProjects.find((e) => e.id === groupProjectId) || {};
+      const jobBoardId = parseInt(props.match.params.jobBoardId);
+      const selectedJobBoard = jobBoards.find((e) => e.id === jobBoardId) || {};
       setJobBoard(selectedJobBoard);
     }
   };
   /*
-        Get groupProject types on initialization so that the <select>
-        element presents groupProject type choices to the user.
+        Get jobBoard types on initialization so that the <select>
+        element presents jobBoard type choices to the user.
     */
   useEffect(() => {
-    getJobBoards();
     getJobBoards();
   }, []);
 
   useEffect(() => {
     getJobBoardInEditMode();
-  }, [groupProjects]);
+  }, []);
   /*
         REFACTOR CHALLENGE START
 
@@ -52,56 +47,41 @@ export const JobBoardForm = (props) => {
         instead of five functions that all, largely, do
         the same thing?
 
-        One hint: [groupProject.target.title]
+        One hint: [jobBoard.target.title]
     */
-  const changeJobBoardTitle = (groupProject) => {
+  const changeJobBoardTitle = (jobBoard) => {
     const newJobBoardState = { ...currentJobBoard };
-    newJobBoardState.title = groupProject.target.value;
-    setCurrentJobBoard(newJobBoardState);
-  };
-  const changeNumberOfSignUps = (groupProject) => {
-    const newJobBoardState = { ...currentJobBoard };
-    newJobBoardState.numberOfGraduatesSignedUp = groupProject.target.value;
+    newJobBoardState.title = jobBoard.target.value;
     setCurrentJobBoard(newJobBoardState);
   };
 
-  const changeJobBoardTimeToCompleteState = (groupProject) => {
+  const changeJobBoardDescriptionState = (jobBoard) => {
     const newJobBoardState = { ...currentJobBoard };
-    newJobBoardState.estimatedTimeToCompletion = groupProject.target.value;
+    newJobBoardState.description = jobBoard.target.value;
     setCurrentJobBoard(newJobBoardState);
   };
 
-  const changeJobBoardDescriptionState = (groupProject) => {
+  const changeJobBoardJobLinkState = (jobBoard) => {
     const newJobBoardState = { ...currentJobBoard };
-    newJobBoardState.description = groupProject.target.value;
-    setCurrentJobBoard(newJobBoardState);
-  };
-
-  const changeJobBoardGitHubLinkState = (groupProject) => {
-    const newJobBoardState = { ...currentJobBoard };
-    newJobBoardState.gitHubLink = groupProject.target.value;
+    newJobBoardState.jobLink = jobBoard.target.value;
     setCurrentJobBoard(newJobBoardState);
   };
 
   const constructUpdateJobBoard = () => {
-    const groupProjectId = parseInt(currentJobBoard.groupProjectId);
+    const jobBoardId = parseInt(currentJobBoard.jobBoardId);
 
-    if (groupProjectId === 0) {
-      window.alert("Please select an groupProject");
+    if (jobBoardId === 0) {
+      window.alert("Please select an jobBoard");
     } else {
       if (editMode) {
         // PUT
         updateJobBoard({
-          id: groupProjectState.id,
-          title: groupProjectState.title,
-          numberOfGraduatesSignedUp:
-            groupProjectState.numberOfGraduatesSignedUp,
-          date: groupProjectState.date,
-          description: groupProjectState.description,
-          estimatedTimeToCompletion:
-            groupProjectState.estimatedTimeToCompletion,
-          project_manager: localStorage.getItem("lu_token"),
-        }).then(() => props.history.push("/groupprojects"));
+          id: jobBoardState.id,
+          title: jobBoardState.title,
+          description: jobBoardState.description,
+          jobLink: jobBoardState.jobLink,
+          poster: localStorage.getItem("lu_token"),
+        }).then(() => props.history.push("/jobboard"));
       }
     }
   };
@@ -109,11 +89,11 @@ export const JobBoardForm = (props) => {
   /* REFACTOR CHALLENGE END */
 
   return (
-    <form className="groupProjectForm">
-      <h2 className="groupProjectForm__title">Register a new group project</h2>
+    <form className="jobBoardForm">
+      <h2 className="jobBoardForm__title">Register a new group project</h2>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="title">Group Project Title: </label>
+          <label htmlFor="title">Job Title: </label>
           <input
             type="title"
             title="title"
@@ -122,22 +102,6 @@ export const JobBoardForm = (props) => {
             className="form-control"
             value={currentJobBoard.title}
             onChange={changeJobBoardTitle}
-          />
-        </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="numberOfGraduatesSignedUp">
-            Number of Graduates Signed Up:{" "}
-          </label>
-          <input
-            type="numberOfGraduatesSignedUp"
-            title="numberOfGraduatesSignedUp"
-            required
-            autoFocus
-            className="form-control"
-            value={currentJobBoard.numberOfGraduatesSignedUp}
-            onChange={changeNumberOfSignUps}
           />
         </div>
       </fieldset>
@@ -158,61 +122,35 @@ export const JobBoardForm = (props) => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="gitHubLink">
-            {" "}
-            What is the GitHub Link for this project?{" "}
-          </label>
+          <label htmlFor="jobLink"> What is the Job Link for this Job? </label>
           <input
             type="text"
-            title="gitHubLink"
+            title="jobLink"
             required
             autoFocus
             className="form-control"
-            value={currentJobBoard.gitHubLink}
-            onChange={changeJobBoardGitHubLinkState}
+            value={currentJobBoard.jobLink}
+            onChange={changeJobBoardJobLinkState}
           />
         </div>
       </fieldset>
 
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="estimatedTimeToCompletion">
-            How long will this project take?{" "}
-          </label>
-          <input
-            type="text"
-            title="estimatedTimeToCompletion"
-            required
-            autoFocus
-            className="form-control"
-            value={currentJobBoard.estimatedTimeToCompletion}
-            onChange={changeJobBoardTimeToCompleteState}
-          />
-        </div>
-      </fieldset>
-
-      {/* You create the rest of the input fields for each groupProject property */}
+      {/* You create the rest of the input fields for each jobBoard property */}
 
       <button
         type="submit"
         onClick={(evt) => {
           // Group Project form from being submitted
           evt.preventDefault();
-          const groupProject = {
+          const jobBoard = {
             title: currentJobBoard.title,
-            numberOfGraduatesSignedUp:
-              currentJobBoard.numberOfGraduatesSignedUp,
-            date: currentJobBoard.date,
             description: currentJobBoard.description,
-            estimatedTimeToCompletion: parseInt(
-              currentJobBoard.estimatedTimeToCompletion
-            ),
             project_manager: localStorage.getItem("lu_token"),
+            jobLink: currentJobBoard.jobLink,
+            poster: localStorage.getItem("lu_token"),
           };
           // Send POST request to your API
-          createJobBoard(groupProject).then(() =>
-            history.push("/groupProjects")
-          );
+          createJobBoard(jobBoard).then(() => history.push("/jobboard"));
         }}
         className="btn btn-primary"
       >

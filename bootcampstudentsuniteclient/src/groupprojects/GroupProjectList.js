@@ -30,7 +30,6 @@ export const GroupProjectList = () => {
         </button>
       </header>
       {groupProjects.map((groupProject) => {
-        debugger;
         return (
           <section key={groupProject.id} className="registration">
             <div className="registration__game">

@@ -3,11 +3,11 @@ import React, { useState } from "react";
 export const JobBoardContext = React.createContext();
 
 export const JobBoardProvider = (props) => {
-  const [games, setJobBoards] = useState([]);
-  const [gameTypes, setTypes] = useState([]);
+  const [jobBoards, setJobBoards] = useState([]);
+  const [jobBoardTypes, setTypes] = useState([]);
 
   const getJobBoards = () => {
-    return fetch("http://localhost:8000/games", {
+    return fetch("http://localhost:8000/jobboard", {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,14 +16,15 @@ export const JobBoardProvider = (props) => {
       .then(setJobBoards);
   };
 
-  const createJobBoard = (game) => {
-    return fetch("http://localhost:8000/games", {
+  const createJobBoard = (jobBoard) => {
+    debugger;
+    return fetch("http://localhost:8000/jobboard", {
       method: "POST",
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(game),
+      body: JSON.stringify(jobBoard),
     })
       .then((response) => response.json())
       .then(getJobBoards);
@@ -42,11 +43,11 @@ export const JobBoardProvider = (props) => {
   return (
     <JobBoardContext.Provider
       value={{
-        games,
+        jobBoards,
         getJobBoards,
         createJobBoard,
         updateJobBoard,
-        gameTypes,
+        jobBoardTypes,
       }}
     >
       {props.children}

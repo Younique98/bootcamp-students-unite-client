@@ -201,7 +201,6 @@ export const GroupProjectForm = (props) => {
       <button
         type="submit"
         onClick={(evt) => {
-          debugger;
           // Group Project form from being submitted
           evt.preventDefault();
           const groupProject = {

@@ -30,7 +30,6 @@ export const GroupProjectProvider = (props) => {
   };
 
   const createGroupProject = (groupProject) => {
-    debugger;
     return fetch("http://localhost:8000/groupprojects", {
       method: "POST",
       headers: {

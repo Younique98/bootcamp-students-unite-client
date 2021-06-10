@@ -3,7 +3,7 @@ import { JobBoardContext } from "./JobBoardProvider.js";
 import { useHistory } from "react-router-dom";
 
 export const JobBoardList = (props) => {
-  const { games, getJobBoards } = useContext(JobBoardContext);
+  const { jobBoards, getJobBoards } = useContext(JobBoardContext);
 
   const history = useHistory();
 
@@ -12,32 +12,28 @@ export const JobBoardList = (props) => {
   }, []);
 
   return (
-    <article className="gameHolder">
+    <article className="jobboardHolder">
       <button
         className="btn btn-2 btn-sep icon-create"
         onClick={() => {
-          history.push({ pathname: "/games/new" });
+          history.push({ pathname: "/jobboard/new" });
         }}
       >
         Register New JobBoard
       </button>
-      <article className="games">
-        {games.map((game) => {
+      <article className="jobboards">
+        {jobBoards.map((jobboard) => {
           return (
             <div className="individualJobBoards">
-              <section key={`game--${game.id}`} className="game">
-                <div className="game__title">
-                  Name of the JobBoard: {game.name}
+              <section key={`jobboard--${jobboard.id}`} className="jobboard">
+                <div className="jobboard__title">
+                  Job Title: {jobboard.title}
                 </div>
-                <div className="game__players">
-                  How many players needed? {game.number_of_players}
+                <div className="jobboard__description">
+                  What is the job description? {jobboard.description}
                 </div>
-                <div className="game__type">
-                  What is the type of game? {game.game_type.type}
-                </div>
-                <div className="game__skillLevel">
-                  What should the skill level be of the players?{" "}
-                  {game.skill_level}
+                <div className="jobboard__jobLink">
+                  What is the job Link? {jobboard.job_link}
                 </div>
               </section>
             </div>
