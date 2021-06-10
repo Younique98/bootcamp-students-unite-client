@@ -1,0 +1,100 @@
+body {
+  background-color: #f6efee;
+}
+
+.profile__info {
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 35%;
+}
+.profile {
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+.profileTitle {
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+  color: goldenrod;
+  text-shadow: 2px 2px red;
+  font-size: 80px;
+}
+
+.games {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 40px;
+}
+.gameholder {
+  display: flex;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 250px;
+}
+
+.individualJobBoards {
+  border: 2px solid lightblue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin: 10px;
+}
+.game {
+  border: 2px solid lightblue;
+  padding-top: 20px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin: 10px;
+  display: flex;
+  width: 550px;
+  /* if need be remove the display flex to get buttons below */
+}
+
+body {
+  background-color: #dff3e4;
+}
+
+.btn {
+  box-shadow: 3px 4px 0px 0px #1564ad;
+  background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+  background-color: #79bbff;
+  border-radius: 5px;
+  border: 1px solid #337bc4;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #528ecc;
+  height: 80px;
+  width: 140px;
+}
+
+.btn:hover {
+  background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+  background-color: #378de5;
+}
+.btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.registrationButton {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-left: 50%;
+}
