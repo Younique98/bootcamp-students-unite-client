@@ -1,0 +1,27 @@
+.jobBoardForm {
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+
+.jobBoards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.individualJobBoards {
+  border: 2px solid lightblue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+body {
+  background-color: #d7f7fe;
+}

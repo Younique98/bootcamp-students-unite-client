@@ -1,0 +1,65 @@
+.profile__info {
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 35%;
+}
+.profile {
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+.profileTitle {
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+  color: goldenrod;
+  text-shadow: 2px 2px red;
+  font-size: 80px;
+}
+
+.individualJobBoards {
+  border: 2px solid lightblue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.btn {
+  background-color: #8bd7d2; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+  background-color: #378de5;
+}
+.btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.registrationButton {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-left: 50%;
+}
+
+.profileprojects {
+  margin-left: 50%;
+  font-size: 34;
+}
