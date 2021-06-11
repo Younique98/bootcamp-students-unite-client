@@ -71,8 +71,9 @@ export const GroupProjectList = () => {
               <button
                 className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
+                  debugger;
                   history.push({
-                    pathname: `/groupprojects/${groupProjects.id}`,
+                    pathname: `/groupprojects/${groupProject.id}`,
                   });
                 }}
               >

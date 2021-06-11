@@ -28,7 +28,7 @@ export const GroupProjectForm = (props) => {
     project_manager: localStorage.getItem("lu_token"),
   });
 
-  const editMode = props.match.params.hasOwnProperty("groupProjectId");
+  const editMode = props.match.params.hasOwnProperty("groupprojectId");
 
   const getGroupProjectInEditMode = () => {
     if (editMode) {
@@ -59,40 +59,40 @@ export const GroupProjectForm = (props) => {
 
         One hint: [groupProject.target.title]
     */
-  const changeGroupProjectTitle = (groupProject) => {
+  const changeGroupProjectTitle = (event) => {
     const newGroupProjectState = { ...currentGroupProject };
-    newGroupProjectState.title = groupProject.target.value;
+    newGroupProjectState.title = event.target.value;
     setCurrentGroupProject(newGroupProjectState);
   };
-  const changeNumberOfSignUps = (groupProject) => {
+  const changeNumberOfSignUps = (event) => {
     const newGroupProjectState = { ...currentGroupProject };
-    newGroupProjectState.numberOfGraduatesSignedUp = groupProject.target.value;
-    setCurrentGroupProject(newGroupProjectState);
-  };
-
-  const changeGroupProjectTimeToCompleteState = (groupProject) => {
-    const newGroupProjectState = { ...currentGroupProject };
-    newGroupProjectState.estimatedTimeToCompletion = groupProject.target.value;
+    newGroupProjectState.numberOfGraduatesSignedUp = event.target.value;
     setCurrentGroupProject(newGroupProjectState);
   };
 
-  const changeGroupProjectDescriptionState = (groupProject) => {
+  const changeGroupProjectTimeToCompleteState = (event) => {
     const newGroupProjectState = { ...currentGroupProject };
-    newGroupProjectState.description = groupProject.target.value;
+    newGroupProjectState.estimatedTimeToCompletion = event.target.value;
     setCurrentGroupProject(newGroupProjectState);
   };
 
-  const changeGroupProjectGitHubLinkState = (groupProject) => {
+  const changeGroupProjectDescriptionState = (event) => {
     const newGroupProjectState = { ...currentGroupProject };
-    newGroupProjectState.gitHubLink = groupProject.target.value;
+    newGroupProjectState.description = event.target.value;
+    setCurrentGroupProject(newGroupProjectState);
+  };
+
+  const changeGroupProjectGitHubLinkState = (event) => {
+    const newGroupProjectState = { ...currentGroupProject };
+    newGroupProjectState.gitHubLink = event.target.value;
     setCurrentGroupProject(newGroupProjectState);
   };
 
   const constructUpdateGroupProject = () => {
-    const groupProjectId = parseInt(currentGroupProject.groupProjectId);
+    const groupProjectId = parseInt(groupProjectState.id);
 
     if (groupProjectId === 0) {
-      window.alert("Please select an groupProject");
+      window.alert("Please select an group project");
     } else {
       if (editMode) {
         // PUT
@@ -116,13 +116,19 @@ export const GroupProjectForm = (props) => {
 
   return (
     <form className="groupProjectForm">
-      <h2 className="groupProjectForm__title">Register a new group project</h2>
+      <h2 className="groupProjectForm__title">
+        {editMode ? "Update Project" : "Create New Group Project"}
+      </h2>
       <fieldset>
+        {console.log(props.match.params)}
+        {console.log(editMode)}
         <div className="form-group">
           <label htmlFor="title">Group Project Title: </label>
           <input
             type="title"
-            title="title"
+            name="title"
+            placeholder="title"
+            defaultValue={groupProjectState.title}
             required
             autoFocus
             className="form-control"
@@ -138,7 +144,9 @@ export const GroupProjectForm = (props) => {
           </label>
           <input
             type="numberOfGraduatesSignedUp"
-            title="numberOfGraduatesSignedUp"
+            name="numberOfGraduatesSignedUp"
+            placeholder="Number of Graduates Signed Up"
+            defaultValue={groupProjectState.numberOfGraduatesSignedUp}
             required
             autoFocus
             className="form-control"
@@ -153,7 +161,9 @@ export const GroupProjectForm = (props) => {
           <label htmlFor="description">Description: </label>
           <input
             type="text"
-            title="description"
+            name="description"
+            placeholder="description"
+            defaultValue={groupProjectState.description}
             required
             autoFocus
             className="form-control"
@@ -170,7 +180,9 @@ export const GroupProjectForm = (props) => {
           </label>
           <input
             type="text"
-            title="gitHubLink"
+            name="gitHubLink"
+            placeholder="GitHub Link"
+            defaultValue={groupProjectState.gitHubLink}
             required
             autoFocus
             className="form-control"
@@ -187,7 +199,9 @@ export const GroupProjectForm = (props) => {
           </label>
           <input
             type="text"
-            title="estimatedTimeToCompletion"
+            name="estimatedTimeToCompletion"
+            placeholder="Estimated Time to Completion"
+            defaultValue={groupProjectState.estimatedTimeToCompletion}
             required
             autoFocus
             className="form-control"
@@ -198,44 +212,45 @@ export const GroupProjectForm = (props) => {
       </fieldset>
 
       {/* You create the rest of the input fields for each groupProject property */}
-
-      <button
-        type="submit"
-        onClick={(evt) => {
-          // Group Project form from being submitted
-          evt.preventDefault();
-          const groupProject = {
-            title: currentGroupProject.title,
-            numberOfGraduatesSignedUp: parseInt(
-              currentGroupProject.numberOfGraduatesSignedUp
-            ),
-            description: currentGroupProject.description,
-            estimatedTimeToCompletion: parseInt(
-              currentGroupProject.estimatedTimeToCompletion
-            ),
-            gitHubLink: currentGroupProject.gitHubLink,
-            project_manager: localStorage.getItem("lu_token"),
-          };
-          // Send POST request to your API
-          createGroupProject(groupProject).then(() =>
-            history.push("/groupprojects")
-          );
-        }}
-        className="btn btn-primary"
-      >
-        Create Project
-      </button>
-
-      <button
-        type="submit"
-        onClick={(evt) => {
-          evt.preventDefault();
-          constructUpdateGroupProject();
-        }}
-        className="btn btn-primary"
-      >
-        {editMode ? "Save Updates" : "Edit GroupProject"}
-      </button>
+      {!editMode ? (
+        <button
+          type="submit"
+          onClick={(evt) => {
+            // Group Project form from being submitted
+            evt.preventDefault();
+            const groupProject = {
+              title: currentGroupProject.title,
+              numberOfGraduatesSignedUp: parseInt(
+                currentGroupProject.numberOfGraduatesSignedUp
+              ),
+              description: currentGroupProject.description,
+              estimatedTimeToCompletion: parseInt(
+                currentGroupProject.estimatedTimeToCompletion
+              ),
+              gitHubLink: currentGroupProject.gitHubLink,
+              project_manager: localStorage.getItem("lu_token"),
+            };
+            // Send POST request to your API
+            createGroupProject(groupProject).then(() =>
+              history.push("/groupprojects")
+            );
+          }}
+          className="btn btn-primary"
+        >
+          Create Project
+        </button>
+      ) : (
+        <button
+          type="submit"
+          onClick={(evt) => {
+            evt.preventDefault();
+            constructUpdateGroupProject();
+          }}
+          className="btn btn-primary"
+        >
+          Save Updates
+        </button>
+      )}
     </form>
   );
 };

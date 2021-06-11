@@ -30,6 +30,10 @@ export const ApplicationViews = () => {
               return <GroupProjectForm {...props} />;
             }}
           />
+          <Route
+            path="/groupprojects/edit/:groupprojectId(\d+)"
+            render={(props) => <GroupProjectForm {...props} />}
+          />
 
           <Route
             path="/groupprojects/:groupprojectId(\d+)"

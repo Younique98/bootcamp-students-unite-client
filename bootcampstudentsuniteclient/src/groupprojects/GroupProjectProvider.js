@@ -55,6 +55,13 @@ export const GroupProjectProvider = (props) => {
       .then((response) => response.json())
       .then(getGroupProjects);
   };
+
+  const DeleteGroupProject = (projectId) => {
+    return fetch(`http://localhost:8000/groupprojectss/${projectId}`, {
+      method: "DELETE",
+    }).then(getGroupProjects);
+  };
+
   const updateGroupProject = (groupProject) => {
     return fetch(`http://localhost:8088/groupprojects/${groupProject.id}`, {
       method: "PUT",
@@ -82,6 +89,8 @@ export const GroupProjectProvider = (props) => {
         joinGroupProject,
         createGroupProject,
         getGroupProjectById,
+        DeleteGroupProject,
+        updateGroupProject,
       }}
     >
       {props.children}

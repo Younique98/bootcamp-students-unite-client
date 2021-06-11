@@ -3,12 +3,8 @@ import { GroupProjectContext } from "./GroupProjectProvider";
 import "./GroupProject.css";
 
 export const GroupProjectDetails = (props) => {
-  const {
-    DeleteGroupProject,
-    getGroupProjectById,
-    getGroupProjectCategories,
-    getGroupProjects,
-  } = useContext(GroupProjectContext);
+  const { DeleteGroupProject, getGroupProjectById, getGroupProjects } =
+    useContext(GroupProjectContext);
 
   const [groupProject, setGroupProject] = useState({});
 
@@ -31,7 +27,7 @@ export const GroupProjectDetails = (props) => {
           Estimated Time To Play: {groupProject.estimated_time_to_completion}
         </div>
         <div className="groupProjectDetail__numberOfGraduatesSignedUp">
-          Number Of GraduatesSignedUp:{" "}
+          Number Of Graduates Signed Up:{" "}
           {groupProject.number_of_graduates_signed_up}
         </div>
 
