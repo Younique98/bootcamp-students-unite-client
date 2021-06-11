@@ -65,6 +65,14 @@ export const GroupProjectProvider = (props) => {
     }).then(getGroupProjects);
   };
 
+  const getGroupProjectById = (id) => {
+    return fetch(`http://localhost:8000/groupprojects/${id}`, {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+      },
+    }).then((res) => res.json());
+  };
+
   return (
     <GroupProjectContext.Provider
       value={{
@@ -73,6 +81,7 @@ export const GroupProjectProvider = (props) => {
         leaveGroupProject,
         joinGroupProject,
         createGroupProject,
+        getGroupProjectById,
       }}
     >
       {props.children}

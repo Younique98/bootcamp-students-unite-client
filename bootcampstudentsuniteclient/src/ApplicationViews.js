@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { GroupProjectList } from "./groupprojects/GroupProjectList";
+import { GroupProjectDetails } from "./groupprojects/GroupProjectDetails";
 import { GroupProjectProvider } from "./groupprojects/GroupProjectProvider";
 import { GroupProjectForm } from "./groupprojects/GroupProjectForm";
 import { JobBoardProvider } from "./jobBoard/JobBoardProvider";
@@ -29,6 +30,13 @@ export const ApplicationViews = () => {
               return <GroupProjectForm {...props} />;
             }}
           />
+
+          <Route
+            path="/groupprojects/:groupprojectId(\d+)"
+            render={(props) => {
+              return <GroupProjectDetails {...props} />;
+            }}
+          ></Route>
         </GroupProjectProvider>
 
         <GroupProjectProvider>

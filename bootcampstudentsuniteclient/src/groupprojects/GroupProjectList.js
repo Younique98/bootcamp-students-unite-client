@@ -29,6 +29,7 @@ export const GroupProjectList = () => {
           Schedule New Group Project
         </button>
       </header>
+      {console.log(groupProjects)}
       {groupProjects.map((groupProject) => {
         return (
           <section key={groupProject.id} className="registration">
@@ -43,7 +44,7 @@ export const GroupProjectList = () => {
               Description of the GroupProject: {groupProject.description}
             </div>
             <div>
-              Skill Level of JobBoard:
+              Estimated time to completion:
               {groupProject.estimated_time_to_completion}
             </div>
             <div>
@@ -51,21 +52,33 @@ export const GroupProjectList = () => {
               {groupProject.project_manager.user.last_name}
             </div>
             <div>Group Project GitHub Link: {groupProject.gitHubLink}</div>
-            {groupProject.joined ? (
+            <div className="projectButtons">
+              {
+                groupProjects.joined ? (
+                  <button
+                    className="btn btn-3"
+                    onClick={() => leaveGroupProject(groupProjects.id)}
+                  >
+                    Leave
+                  </button>
+                ) : (
+                  ""
+                )
+                // <button className="btn btn-2"
+                //     onClick={() => joinGroupProject(groupProjects.id)}
+                //     >Follow</button>
+              }
               <button
-                className="btn btn-3"
-                onClick={() => leaveGroupProject(groupProject.id)}
+                className="btn btn-2 btn-sep icon-create"
+                onClick={() => {
+                  history.push({
+                    pathname: `/groupprojects/${groupProjects.id}`,
+                  });
+                }}
               >
-                Leave
+                View Group Project
               </button>
-            ) : (
-              <button
-                className="btn btn-2"
-                onClick={() => joinGroupProject(groupProject.id)}
-              >
-                Join
-              </button>
-            )}
+            </div>
           </section>
         );
       })}
