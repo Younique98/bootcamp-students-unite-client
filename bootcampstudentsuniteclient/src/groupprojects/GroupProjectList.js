@@ -32,7 +32,7 @@ export const GroupProjectList = () => {
       {groupProjects.map((groupProject) => {
         return (
           <section key={groupProject.id} className="registration">
-            <div className="registration__game">
+            <div className="registration__groupproject">
               Name of the GroupProject: {groupProject.title}
             </div>
             <div>
@@ -40,7 +40,7 @@ export const GroupProjectList = () => {
               {groupProject.number_of_graduates_signed_up}
             </div>
             <div>
-              Description of the GroupProject:{groupProject.description}
+              Description of the GroupProject: {groupProject.description}
             </div>
             <div>
               Skill Level of JobBoard:

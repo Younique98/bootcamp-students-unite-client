@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./NavBar.css";
 
 export const NavBar = (props) => {
   return (
@@ -29,9 +30,9 @@ export const NavBar = (props) => {
         </Link>
       </li>
       {localStorage.getItem("lu_token") !== null ? (
-        <li className="nav-item">
+        <li className="navbar__item">
           <button
-            className="nav-link fakeLink"
+            className="navbar__logout__item"
             onClick={() => {
               localStorage.removeItem("lu_token");
               props.history.push({ pathname: "/" });

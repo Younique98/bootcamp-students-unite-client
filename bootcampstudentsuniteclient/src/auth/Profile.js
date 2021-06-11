@@ -34,6 +34,21 @@ export const Profile = () => {
           {profile.bootcamp_graduate && profile.bootcamp_graduate.bio}
         </div>
       </section>
+      <section className="profile__registrations">
+        <header className="registrations__header">
+          <h3>Your Projects</h3>
+        </header>
+        <div className="registrations">
+          {profile.group_projects.map((project) => {
+            return (
+              <div key={project.id} className="registration">
+                <div className="registration__project">{project.title}</div>
+                <div>{project.description}</div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </article>
   );
 };

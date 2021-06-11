@@ -6,7 +6,7 @@ import "./JobBoard.css";
 
 export const JobBoardForm = () => {
   const history = useHistory();
-  const { createJobBoard, getJobBoardTypes, gameTypes } =
+  const { createJobBoard, getJobBoardTypes, jobBoardTypes } =
     useContext(JobBoardContext);
 
   /*
@@ -19,12 +19,12 @@ export const JobBoardForm = () => {
     maker: localStorage.getItem("lu_token"),
     numberOfPlayers: 0,
     skillLevel: 1,
-    gameTypeId: 0,
+    jobBoardTypeId: 0,
   });
 
   /*
-        Get game types on initialization so that the <select>
-        element presents game type choices to the user.
+        Get jobBoard types on initialization so that the <select>
+        element presents jobBoard type choices to the user.
     */
   useEffect(() => {
     getJobBoardTypes();
@@ -66,7 +66,7 @@ export const JobBoardForm = () => {
 
   const changeJobBoardTypeState = (event) => {
     const newJobBoardState = { ...currentJobBoard };
-    newJobBoardState.gameTypeId = event.target.value;
+    newJobBoardState.jobBoardTypeId = event.target.value;
     setCurrentJobBoard(newJobBoardState);
   };
 
@@ -80,8 +80,8 @@ export const JobBoardForm = () => {
   /* REFACTOR CHALLENGE END */
 
   return (
-    <form className="gameForm">
-      <h2 className="gameForm__title">Register New JobBoard</h2>
+    <form className="jobBoardForm">
+      <h2 className="jobBoardForm__title">Register New JobBoard</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">Title: </label>
@@ -126,15 +126,15 @@ export const JobBoardForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="gameTypeId">What is the game type? </label>
+          <label htmlFor="jobBoardTypeId">What is the jobBoard type? </label>
           <select
-            name="gameTypeId"
+            name="jobBoardTypeId"
             className="form-control"
-            value={currentJobBoard.gameTypeId}
+            value={currentJobBoard.jobBoardTypeId}
             onChange={changeJobBoardTypeState}
           >
             <option value="0">Select a JobBoard Type</option>
-            {gameTypes.map((type) => (
+            {jobBoardTypes.map((type) => (
               <option key={type.id} value={type.id}>
                 {type.type}
               </option>
@@ -143,7 +143,7 @@ export const JobBoardForm = () => {
         </div>
       </fieldset>
 
-      {/* You create the rest of the input fields for each game property */}
+      {/* You create the rest of the input fields for each jobBoard property */}
 
       <button
         type="submit"
@@ -151,15 +151,15 @@ export const JobBoardForm = () => {
           // Prevent form from being submitted
           evt.preventDefault();
 
-          const game = {
+          const jobBoard = {
             maker: localStorage.getItem("lu_token"),
             name: currentJobBoard.name,
             numberOfPlayers: parseInt(currentJobBoard.numberOfPlayers),
             skillLevel: parseInt(currentJobBoard.skillLevel),
-            gameTypeId: parseInt(currentJobBoard.gameTypeId),
+            jobBoardTypeId: parseInt(currentJobBoard.jobBoardTypeId),
           };
           // Send POST request to your API
-          createJobBoard(game).then(() => history.push("/"));
+          createJobBoard(jobBoard).then(() => history.push("/"));
         }}
         className="btn btn-primary"
       >

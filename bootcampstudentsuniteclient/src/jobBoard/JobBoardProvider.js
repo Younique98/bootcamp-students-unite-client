@@ -17,7 +17,6 @@ export const JobBoardProvider = (props) => {
   };
 
   const createJobBoard = (jobBoard) => {
-    debugger;
     return fetch("http://localhost:8000/jobboard", {
       method: "POST",
       headers: {

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { JobBoardContext } from "./JobBoardProvider.js";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const JobBoardList = (props) => {
   const { jobBoards, getJobBoards } = useContext(JobBoardContext);
@@ -30,10 +31,11 @@ export const JobBoardList = (props) => {
                   Job Title: {jobboard.title}
                 </div>
                 <div className="jobboard__description">
-                  What is the job description? {jobboard.description}
+                  Job Description: {jobboard.description}
                 </div>
                 <div className="jobboard__jobLink">
-                  What is the job Link? {jobboard.job_link}
+                  Job Link:
+                  <a href={jobboard.job_link}> Apply</a>
                 </div>
               </section>
             </div>

@@ -10,7 +10,7 @@ export const Register = (props) => {
   const password = React.createRef();
   const verifyPassword = React.createRef();
   const passwordDialog = React.createRef();
-  const uploadCurrentJobBoardPlaying = React.createRef();
+  const uploadProfileImg = React.createRef();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -23,11 +23,10 @@ export const Register = (props) => {
         bio: bio.current.value,
         email: email.current.value,
         password: password.current.value,
-        uploadCurrentJobBoardPlaying:
-          uploadCurrentJobBoardPlaying.current.files[0],
+        uploadProfileImg: uploadProfileImg.current.files[0],
       };
 
-      return fetch("http://127.0.0.1:3000/register", {
+      return fetch("http://localhost:8000/register", {
         method: "POST",
         headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`,
@@ -119,25 +118,22 @@ export const Register = (props) => {
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="verifyPassword"> Bio </label>
+          <label htmlFor="bio"> Bio </label>
           <textarea
             ref={bio}
             name="bio"
             className="form-control"
-            placeholder="Let other gamers know a little bit about you..."
+            placeholder="Let other users know a little bit about you..."
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="uploadCurrentJobBoardPlaying">
-            {" "}
-            Image of Current JobBoard Being Played{" "}
-          </label>
+          <label htmlFor="uploadProfileImg">Upload Profile Image</label>
           <input
             type="file"
-            ref={uploadCurrentJobBoardPlaying}
-            name="uploadCurrentJobBoardPlaying"
+            ref={uploadProfileImg}
+            name="uploadProfileImg"
             className="form-control"
-            placeholder="Please upload an image of the current game you are playing..."
+            placeholder="Please upload a profile image..."
           />
         </fieldset>
         <fieldset

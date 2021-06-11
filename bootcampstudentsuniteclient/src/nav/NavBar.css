@@ -8,18 +8,32 @@
     flex-basis: 20%;
     list-style-type: none;
 } */
+
+.navbar__logout__item {
+  background-color: #008d9d;
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  transition: all 0.5s ease;
+  /* border-style: none; */
+}
 .navbar {
   min-width: 800px;
-  background: #ff00cc; /* fallback for old browsers */
+  background: #d7f7fe; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #333399,
-    #ff00cc
+    #8bd7d2,
+    #008d9d
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #333399,
-    #ff00cc
+    #6987c9,
+    #0f8b8d
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   margin: 0px;

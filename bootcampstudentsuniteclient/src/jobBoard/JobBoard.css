@@ -1,4 +1,4 @@
-.gameForm {
+.jobBoardForm {
   border: 2px solid lightblue;
   border-radius: 5px;
   padding-top: 50px;
@@ -7,7 +7,7 @@
   padding-left: 80px;
 }
 
-.games {
+.jobBoards {
   display: flex;
   flex-wrap: wrap;
 }
@@ -18,8 +18,10 @@
   padding-bottom: 20px;
   padding-left: 10px;
   margin: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 body {
-  background-color: #dff3e4;
+  background-color: #d7f7fe;
 }

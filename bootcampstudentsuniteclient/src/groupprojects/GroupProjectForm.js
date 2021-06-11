@@ -103,6 +103,7 @@ export const GroupProjectForm = (props) => {
             groupProjectState.numberOfGraduatesSignedUp,
           date: groupProjectState.date,
           description: groupProjectState.description,
+          gitHubLink: groupProjectState.gitHubLink,
           estimatedTimeToCompletion:
             groupProjectState.estimatedTimeToCompletion,
           project_manager: localStorage.getItem("lu_token"),
@@ -212,6 +213,7 @@ export const GroupProjectForm = (props) => {
             estimatedTimeToCompletion: parseInt(
               currentGroupProject.estimatedTimeToCompletion
             ),
+            gitHubLink: currentGroupProject.gitHubLink,
             project_manager: localStorage.getItem("lu_token"),
           };
           // Send POST request to your API

@@ -1,5 +1,17 @@
-body {background-color: #F6EFEE;}
+body {
+  background-color: #d7f7fe;
+}
 
 .registration {
-    display: flex
+  border: 2px solid lightblue;
+  margin: 30px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  float: left;
+  width: 25%;
+  padding: 0 10px;
 }
