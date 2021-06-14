@@ -41,7 +41,6 @@ export const Profile = () => {
           <h3 className="profileprojects">Your Projects</h3>
         </header>
         <div className="registrations">
-          {console.log(profile)}
           {profile.group_projects?.map((project) => {
             return (
               <div key={project.id} className="registration">

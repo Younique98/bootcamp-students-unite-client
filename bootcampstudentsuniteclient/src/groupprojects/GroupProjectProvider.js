@@ -39,7 +39,6 @@ export const GroupProjectProvider = (props) => {
   };
 
   const joinGroupProject = (groupProjectId) => {
-    debugger;
     return fetch(
       `http://localhost:8000/groupprojects/${groupProjectId}/signup`,
       {
@@ -58,7 +57,7 @@ export const GroupProjectProvider = (props) => {
   };
 
   const updateGroupProject = (groupProject) => {
-    return fetch(`http://localhost:8088/groupprojects/${groupProject.id}`, {
+    return fetch(`http://localhost:8000/groupprojects/${groupProject.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

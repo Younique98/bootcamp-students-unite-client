@@ -6,10 +6,8 @@ export const GroupProjectForm = (props) => {
   const history = useHistory();
   const {
     createGroupProject,
-    joinGroupProject,
-    leaveGroupProject,
     updateGroupProject,
-    getGroupProjects,
+    getGroupProjectById,
     groupProjects,
   } = useContext(GroupProjectContext);
 
@@ -32,23 +30,24 @@ export const GroupProjectForm = (props) => {
 
   const getGroupProjectInEditMode = () => {
     if (editMode) {
-      const groupProjectId = parseInt(props.match.params.groupProjectId);
+      const groupProjectId = parseInt(props.match.params.groupprojectId);
       const selectedGroupProject =
-        groupProjects.find((e) => e.id === groupProjectId) || {};
+        groupProjects.find((project) => project.id === groupProjectId) || {};
       setGroupProject(selectedGroupProject);
+      setCurrentGroupProject(selectedGroupProject);
     }
   };
+  console.log(currentGroupProject.participants?.length);
   /*
         Get groupProject types on initialization so that the <select>
         element presents groupProject type choices to the user.
     */
   useEffect(() => {
-    getGroupProjects();
+    const projectId = parseInt(props.match.params.groupprojectId);
+    getGroupProjectById(projectId).then((res) => setCurrentGroupProject(res));
+    getGroupProjectInEditMode();
   }, []);
 
-  useEffect(() => {
-    getGroupProjectInEditMode();
-  }, [groupProjects]);
   /*
         REFACTOR CHALLENGE START
 
@@ -62,6 +61,7 @@ export const GroupProjectForm = (props) => {
   const changeGroupProjectTitle = (event) => {
     const newGroupProjectState = { ...currentGroupProject };
     newGroupProjectState.title = event.target.value;
+
     setCurrentGroupProject(newGroupProjectState);
   };
   const changeNumberOfSignUps = (event) => {
@@ -89,7 +89,12 @@ export const GroupProjectForm = (props) => {
   };
 
   const constructUpdateGroupProject = () => {
-    const groupProjectId = parseInt(groupProjectState.id);
+    debugger;
+    const groupProjectId = parseInt(currentGroupProject.id);
+
+    // const number_of_graduates_signed_up = currentGroupProject.participants;
+    // let countofstudents = number_of_graduates_signed_up.length;
+    // console.log(countofstudents);
 
     if (groupProjectId === 0) {
       window.alert("Please select an group project");
@@ -99,15 +104,14 @@ export const GroupProjectForm = (props) => {
         updateGroupProject({
           id: groupProjectState.id,
           title: groupProjectState.title,
-          numberOfGraduatesSignedUp:
-            groupProjectState.numberOfGraduatesSignedUp,
+          numberOfGraduatesSignedUp: currentGroupProject.participants?.length,
           date: groupProjectState.date,
           description: groupProjectState.description,
-          gitHubLink: groupProjectState.gitHubLink,
+          gitHubLink: groupProjectState.github_link,
           estimatedTimeToCompletion:
-            groupProjectState.estimatedTimeToCompletion,
+            groupProjectState.estimated_time_to_completion,
           project_manager: localStorage.getItem("bc_token"),
-        }).then(() => props.history.push("/groupprojects"));
+        }).then(() => props.history.push("/"));
       }
     }
   };
@@ -120,24 +124,21 @@ export const GroupProjectForm = (props) => {
         {editMode ? "Update Project" : "Create New Group Project"}
       </h2>
       <fieldset>
-        {console.log(props.match.params)}
-        {console.log(editMode)}
         <div className="form-group">
           <label htmlFor="title">Group Project Title: </label>
           <input
             type="title"
             name="title"
             placeholder="title"
-            defaultValue={groupProjectState.title}
+            defaultValue={currentGroupProject.title}
             required
             autoFocus
             className="form-control"
-            value={currentGroupProject.title}
             onChange={changeGroupProjectTitle}
           />
         </div>
       </fieldset>
-      <fieldset>
+      {/* <fieldset>
         <div className="form-group">
           <label htmlFor="numberOfGraduatesSignedUp">
             Number of Graduates Signed Up:{" "}
@@ -146,15 +147,14 @@ export const GroupProjectForm = (props) => {
             type="numberOfGraduatesSignedUp"
             name="numberOfGraduatesSignedUp"
             placeholder="Number of Graduates Signed Up"
-            value={groupProjectState.numberOfGraduatesSignedUp}
             required
             autoFocus
             className="form-control"
-            defaultValue={currentGroupProject.numberOfGraduatesSignedUp}
+            defaultValue={currentGroupProject.number_of_graduates_signedUp}
             onChange={changeNumberOfSignUps}
           />
         </div>
-      </fieldset>
+      </fieldset> */}
 
       <fieldset>
         <div className="form-group">
@@ -163,11 +163,10 @@ export const GroupProjectForm = (props) => {
             type="text"
             name="description"
             placeholder="description"
-            defaultValue={groupProjectState.description}
+            defaultValue={currentGroupProject.description}
             required
             autoFocus
             className="form-control"
-            value={currentGroupProject.description}
             onChange={changeGroupProjectDescriptionState}
           />
         </div>
@@ -182,11 +181,10 @@ export const GroupProjectForm = (props) => {
             type="text"
             name="gitHubLink"
             placeholder="GitHub Link"
-            defaultValue={groupProjectState.gitHubLink}
+            defaultValue={currentGroupProject.github_link}
             required
             autoFocus
             className="form-control"
-            value={currentGroupProject.gitHubLink}
             onChange={changeGroupProjectGitHubLinkState}
           />
         </div>
@@ -195,17 +193,16 @@ export const GroupProjectForm = (props) => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="estimatedTimeToCompletion">
-            How long will this project take?{" "}
+            How many weeks will this project take?{" "}
           </label>
           <input
             type="text"
             name="estimatedTimeToCompletion"
             placeholder="Estimated Time to Completion"
-            defaultValue={groupProjectState.estimatedTimeToCompletion}
+            defaultValue={currentGroupProject.estimated_time_to_completion}
             required
             autoFocus
             className="form-control"
-            value={currentGroupProject.estimatedTimeToCompletion}
             onChange={changeGroupProjectTimeToCompleteState}
           />
         </div>
@@ -231,9 +228,7 @@ export const GroupProjectForm = (props) => {
               project_manager: localStorage.getItem("bc_token"),
             };
             // Send POST request to your API
-            createGroupProject(groupProject).then(() =>
-              history.push("/groupprojects")
-            );
+            createGroupProject(groupProject).then(() => history.push("/"));
           }}
           className="btn btn-primary"
         >
