@@ -5,6 +5,7 @@ import "./GroupProject.css";
 
 export const GroupProjectList = () => {
   const history = useHistory();
+  const loggedInUser = +localStorage.getItem("id");
   const {
     groupProjects,
     getGroupProjects,
@@ -29,16 +30,18 @@ export const GroupProjectList = () => {
           Schedule New Group Project
         </button>
       </header>
-      {console.log(groupProjects)}
+
       {groupProjects.map((groupProject) => {
+        let numberofstudents = groupProject.participants?.length;
+        console.log(numberofstudents);
         return (
           <section key={groupProject.id} className="registration">
             <div className="registration__groupproject">
               Name of the GroupProject: {groupProject.title}
             </div>
             <div>
-              Number of Gradautes Signed Up:
-              {groupProject.number_of_graduates_signed_up}
+              Number of Graduates Signed Up:
+              {numberofstudents}
             </div>
             <div>
               Description of the GroupProject: {groupProject.description}
@@ -53,25 +56,24 @@ export const GroupProjectList = () => {
             </div>
             <div>Group Project GitHub Link: {groupProject.gitHubLink}</div>
             <div className="projectButtons">
-              {
-                groupProjects.joined ? (
-                  <button
-                    className="btn btn-3"
-                    onClick={() => leaveGroupProject(groupProjects.id)}
-                  >
-                    Leave
-                  </button>
-                ) : (
-                  ""
-                )
-                // <button className="btn btn-2"
-                //     onClick={() => joinGroupProject(groupProjects.id)}
-                //     >Follow</button>
-              }
+              {groupProject.participants.includes(loggedInUser) ? (
+                <button
+                  className="btn btn-3"
+                  onClick={() => leaveGroupProject(groupProject.id)}
+                >
+                  Leave
+                </button>
+              ) : (
+                <button
+                  className="btn btn-2"
+                  onClick={() => joinGroupProject(parseInt(groupProject.id))}
+                >
+                  Join
+                </button>
+              )}
               <button
                 className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
-                  debugger;
                   history.push({
                     pathname: `/groupprojects/${groupProject.id}`,
                   });

@@ -1,10 +1,12 @@
 import React, { useEffect, useContext } from "react";
 import { ProfileContext } from "./ProfileProvider.js";
+import { useHistory } from "react-router-dom";
 import "./Profile.css";
 
 export const Profile = () => {
   const { profile, getProfile } = useContext(ProfileContext);
 
+  const history = useHistory();
   useEffect(() => {
     getProfile();
   }, []);
@@ -39,15 +41,22 @@ export const Profile = () => {
           <h3 className="profileprojects">Your Projects</h3>
         </header>
         <div className="registrations">
-          {console.log(profile)}
           {profile.group_projects?.map((project) => {
             return (
               <div key={project.id} className="registration">
                 <div className="registration__project">
                   Title: {project.title}
+                  <div>Description: {project.description}</div>
+                  <a href="{project.github_link}">GitHub Link</a>
                 </div>
-                <div>Description: {project.description}</div>
-                <a href="{project.github_link}">GitHub Link</a>
+                <button
+                  className="btn btn-2 btn-sep icon-create"
+                  onClick={() => {
+                    history.push(`/groupprojects/${project.id}`);
+                  }}
+                >
+                  Go to Project
+                </button>
               </div>
             );
           })}

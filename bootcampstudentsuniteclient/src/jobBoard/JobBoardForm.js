@@ -17,7 +17,7 @@ export const JobBoardForm = (props) => {
     title: "",
     description: "",
     jobLink: "",
-    poster: localStorage.getItem("lu_token"),
+    poster: localStorage.getItem("bc_token"),
   });
   const editMode = props.match.params.hasOwnProperty("jobBoardId");
 
@@ -80,7 +80,7 @@ export const JobBoardForm = (props) => {
           title: jobBoardState.title,
           description: jobBoardState.description,
           jobLink: jobBoardState.jobLink,
-          poster: localStorage.getItem("lu_token"),
+          poster: localStorage.getItem("bc_token"),
         }).then(() => props.history.push("/jobboard"));
       }
     }
@@ -145,9 +145,9 @@ export const JobBoardForm = (props) => {
           const jobBoard = {
             title: currentJobBoard.title,
             description: currentJobBoard.description,
-            project_manager: localStorage.getItem("lu_token"),
+            project_manager: localStorage.getItem("bc_token"),
             jobLink: currentJobBoard.jobLink,
-            poster: localStorage.getItem("lu_token"),
+            poster: localStorage.getItem("bc_token"),
           };
           // Send POST request to your API
           createJobBoard(jobBoard).then(() => history.push("/jobboard"));

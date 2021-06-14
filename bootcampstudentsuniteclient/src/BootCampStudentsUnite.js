@@ -9,7 +9,7 @@ export const BootCampStudentsUnite = () => (
   <>
     <Route
       render={() => {
-        if (localStorage.getItem("lu_token")) {
+        if (localStorage.getItem("bc_token")) {
           return (
             <>
               <Route render={NavBar} />
