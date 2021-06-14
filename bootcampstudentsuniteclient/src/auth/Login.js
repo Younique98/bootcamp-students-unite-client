@@ -13,7 +13,7 @@ export const Login = (props) => {
     return fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
         "Content-Type": "application/json",
         Accept: "application/json",
       },
@@ -25,7 +25,8 @@ export const Login = (props) => {
       .then((res) => res.json())
       .then((res) => {
         if ("valid" in res && res.valid && "token" in res) {
-          localStorage.setItem("lu_token", res.token);
+          localStorage.setItem("bc_token", res.token);
+          localStorage.setItem("id", res.id);
           props.history.push("/");
         } else {
           invalidDialog.current.showModal();

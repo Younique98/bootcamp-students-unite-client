@@ -16,7 +16,7 @@ export const JobBoardForm = () => {
     */
   const [currentJobBoard, setCurrentJobBoard] = useState({
     name: "",
-    maker: localStorage.getItem("lu_token"),
+    maker: localStorage.getItem("bc_token"),
     numberOfPlayers: 0,
     skillLevel: 1,
     jobBoardTypeId: 0,
@@ -152,7 +152,7 @@ export const JobBoardForm = () => {
           evt.preventDefault();
 
           const jobBoard = {
-            maker: localStorage.getItem("lu_token"),
+            maker: localStorage.getItem("bc_token"),
             name: currentJobBoard.name,
             numberOfPlayers: parseInt(currentJobBoard.numberOfPlayers),
             skillLevel: parseInt(currentJobBoard.skillLevel),

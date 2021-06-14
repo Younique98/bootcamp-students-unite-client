@@ -9,7 +9,7 @@ export const JobBoardProvider = (props) => {
   const getJobBoards = () => {
     return fetch("http://localhost:8000/jobboard", {
       headers: {
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
       },
     })
       .then((response) => response.json())
@@ -20,7 +20,7 @@ export const JobBoardProvider = (props) => {
     return fetch("http://localhost:8000/jobboard", {
       method: "POST",
       headers: {
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(jobBoard),
@@ -33,7 +33,7 @@ export const JobBoardProvider = (props) => {
     return fetch(`http://localhost:8000/jobboard/${jobboard.id}`, {
       method: "PUT",
       headers: {
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
       },
     })
       .then((response) => response.json())

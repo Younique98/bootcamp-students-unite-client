@@ -8,7 +8,7 @@ export const GroupProjectProvider = (props) => {
   const getGroupProjects = () => {
     return fetch("http://localhost:8000/groupprojects", {
       headers: {
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
       },
     })
       .then((response) => response.json())
@@ -21,43 +21,38 @@ export const GroupProjectProvider = (props) => {
       {
         method: "DELETE",
         headers: {
-          Authorization: `Token ${localStorage.getItem("lu_token")}`,
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
         },
       }
-    )
-      .then((response) => response.json())
-      .then(getGroupProjects);
+    ).then(getGroupProjects);
   };
 
   const createGroupProject = (groupProject) => {
     return fetch("http://localhost:8000/groupprojects", {
       method: "POST",
       headers: {
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(groupProject),
-    })
-      .then((response) => response.json())
-      .then(getGroupProjects);
+    }).then(getGroupProjects);
   };
 
   const joinGroupProject = (groupProjectId) => {
+    debugger;
     return fetch(
       `http://localhost:8000/groupprojects/${groupProjectId}/signup`,
       {
         method: "POST",
         headers: {
-          Authorization: `Token ${localStorage.getItem("lu_token")}`,
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
         },
       }
-    )
-      .then((response) => response.json())
-      .then(getGroupProjects);
+    ).then(getGroupProjects);
   };
 
   const DeleteGroupProject = (projectId) => {
-    return fetch(`http://localhost:8000/groupprojectss/${projectId}`, {
+    return fetch(`http://localhost:8000/groupprojects/${projectId}`, {
       method: "DELETE",
     }).then(getGroupProjects);
   };
@@ -75,7 +70,7 @@ export const GroupProjectProvider = (props) => {
   const getGroupProjectById = (id) => {
     return fetch(`http://localhost:8000/groupprojects/${id}`, {
       headers: {
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
       },
     }).then((res) => res.json());
   };

@@ -29,12 +29,12 @@ export const NavBar = (props) => {
           Sign Up
         </Link>
       </li>
-      {localStorage.getItem("lu_token") !== null ? (
+      {localStorage.getItem("bc_token") !== null ? (
         <li className="navbar__item">
           <button
             className="navbar__logout__item"
             onClick={() => {
-              localStorage.removeItem("lu_token");
+              localStorage.removeItem("bc_token");
               props.history.push({ pathname: "/" });
             }}
           >

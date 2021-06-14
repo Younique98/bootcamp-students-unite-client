@@ -25,7 +25,7 @@ export const GroupProjectForm = (props) => {
     description: "",
     estimatedTimeToCompletion: "",
     gitHubLink: "",
-    project_manager: localStorage.getItem("lu_token"),
+    project_manager: localStorage.getItem("bc_token"),
   });
 
   const editMode = props.match.params.hasOwnProperty("groupprojectId");
@@ -106,7 +106,7 @@ export const GroupProjectForm = (props) => {
           gitHubLink: groupProjectState.gitHubLink,
           estimatedTimeToCompletion:
             groupProjectState.estimatedTimeToCompletion,
-          project_manager: localStorage.getItem("lu_token"),
+          project_manager: localStorage.getItem("bc_token"),
         }).then(() => props.history.push("/groupprojects"));
       }
     }
@@ -146,11 +146,11 @@ export const GroupProjectForm = (props) => {
             type="numberOfGraduatesSignedUp"
             name="numberOfGraduatesSignedUp"
             placeholder="Number of Graduates Signed Up"
-            defaultValue={groupProjectState.numberOfGraduatesSignedUp}
+            value={groupProjectState.numberOfGraduatesSignedUp}
             required
             autoFocus
             className="form-control"
-            value={currentGroupProject.numberOfGraduatesSignedUp}
+            defaultValue={currentGroupProject.numberOfGraduatesSignedUp}
             onChange={changeNumberOfSignUps}
           />
         </div>
@@ -228,7 +228,7 @@ export const GroupProjectForm = (props) => {
                 currentGroupProject.estimatedTimeToCompletion
               ),
               gitHubLink: currentGroupProject.gitHubLink,
-              project_manager: localStorage.getItem("lu_token"),
+              project_manager: localStorage.getItem("bc_token"),
             };
             // Send POST request to your API
             createGroupProject(groupProject).then(() =>
