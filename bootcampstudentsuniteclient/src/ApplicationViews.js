@@ -45,9 +45,13 @@ export const ApplicationViews = () => {
 
         <GroupProjectProvider>
           <JobBoardProvider>
-            <Route exact path="/jobboard">
-              <JobBoardList />
-            </Route>
+            <Route
+              exact
+              path="/jobboard"
+              render={(props) => {
+                return <JobBoardList {...props} />;
+              }}
+            />
             <Route
               exact
               path="/jobboard/new"

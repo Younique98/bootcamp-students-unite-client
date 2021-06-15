@@ -53,6 +53,9 @@ export const GroupProjectProvider = (props) => {
   const DeleteGroupProject = (projectId) => {
     return fetch(`http://localhost:8000/groupprojects/${projectId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
+      },
     }).then(getGroupProjects);
   };
 
@@ -60,6 +63,7 @@ export const GroupProjectProvider = (props) => {
     return fetch(`http://localhost:8000/groupprojects/${groupProject.id}`, {
       method: "PUT",
       headers: {
+        Authorization: `Token ${localStorage.getItem("bc_token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(groupProject),

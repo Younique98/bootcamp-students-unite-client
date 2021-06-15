@@ -3,6 +3,7 @@ import { GroupProjectContext } from "./GroupProjectProvider";
 import "./GroupProject.css";
 
 export const GroupProjectDetails = (props) => {
+  const loggedInUser = +localStorage.getItem("id");
   const { DeleteGroupProject, getGroupProjectById, getGroupProjects } =
     useContext(GroupProjectContext);
 
@@ -16,6 +17,7 @@ export const GroupProjectDetails = (props) => {
   useEffect(() => {
     getGroupProjects();
   }, []);
+
   return (
     <section className="groupProjectDetail">
       <h1 className="groupProjectName">{groupProject.title}</h1>
@@ -30,16 +32,20 @@ export const GroupProjectDetails = (props) => {
           Number Of Graduates Signed Up:{" "}
           {groupProject.number_of_graduates_signed_up}
         </div>
-
-        <button
-          onClick={() =>
-            DeleteGroupProject(groupProject.id).then(() =>
-              props.history.push("/")
-            )
-          }
-        >
-          Delete Group Project
-        </button>
+        {console.log(groupProject?.project_manager?.user?.id)}
+        {groupProject?.project_manager?.user?.id == loggedInUser ? (
+          <button
+            onClick={() => {
+              DeleteGroupProject(groupProject.id).then(() =>
+                props.history.push("/")
+              );
+            }}
+          >
+            Delete Group Project
+          </button>
+        ) : (
+          ""
+        )}
 
         <button
           onClick={() => {

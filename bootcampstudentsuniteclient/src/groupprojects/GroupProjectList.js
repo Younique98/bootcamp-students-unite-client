@@ -33,7 +33,6 @@ export const GroupProjectList = () => {
 
       {groupProjects.map((groupProject) => {
         let numberofstudents = groupProject.participants?.length;
-        console.log(numberofstudents);
         return (
           <section key={groupProject.id} className="registration">
             <div className="registration__groupproject">

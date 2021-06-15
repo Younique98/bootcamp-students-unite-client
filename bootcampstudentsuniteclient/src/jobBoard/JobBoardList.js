@@ -13,35 +13,31 @@ export const JobBoardList = (props) => {
   }, []);
 
   return (
-    <article className="jobboardHolder">
-      <button
-        className="btn btn-2 btn-sep icon-create"
-        onClick={() => {
-          history.push({ pathname: "/jobboard/new" });
-        }}
-      >
-        Register New JobBoard
-      </button>
-      <article className="jobboards">
-        {jobBoards.map((jobboard) => {
-          return (
-            <div className="individualJobBoards">
-              <section key={`jobboard--${jobboard.id}`} className="jobboard">
-                <div className="jobboard__title">
-                  Job Title: {jobboard.title}
-                </div>
-                <div className="jobboard__description">
-                  Job Description: {jobboard.description}
-                </div>
-                <div className="jobboard__jobLink">
-                  Job Link:
-                  <a href={jobboard.job_link}> Apply</a>
-                </div>
-              </section>
+    <article className="jobboards">
+      <header className="jobBoards__header">
+        <button
+          className="btn btn-2 btn-sep icon-create"
+          onClick={() => {
+            history.push({ pathname: "/jobboard/new" });
+          }}
+        >
+          Register New JobBoard
+        </button>
+      </header>
+      {jobBoards.map((jobboard) => {
+        return (
+          <section key={jobboard.id} className="jobboard">
+            <div className="jobboard__title">Job Title: {jobboard.title}</div>
+            <div className="jobboard__description">
+              Job Description: {jobboard.description}
             </div>
-          );
-        })}
-      </article>
+            <div className="jobboard__jobLink">
+              Job Link:
+              <a href={jobboard.job_link}> Apply</a>
+            </div>
+          </section>
+        );
+      })}
       .
     </article>
   );
