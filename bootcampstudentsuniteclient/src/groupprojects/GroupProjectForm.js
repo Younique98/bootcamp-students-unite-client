@@ -3,6 +3,7 @@ import { GroupProjectContext } from "./GroupProjectProvider.js";
 import { useHistory } from "react-router-dom";
 
 export const GroupProjectForm = (props) => {
+  // utilize history
   const history = useHistory();
   const {
     createGroupProject,
