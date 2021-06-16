@@ -3,7 +3,9 @@
 
 ## Start server
 
-npm start
+1) Clone this project git clone git@github.com:Younique98/bootcamp-students-unite-client.git
+2) npm install.
+3) npm start
 
 ![Bootcamp Students Unite](https://user-images.githubusercontent.com/18708698/122235033-370b1980-ce72-11eb-9bc9-3e476e2363cc.png)
 ![Bootcamp Students Unite Wirefame](https://user-images.githubusercontent.com/18708698/122235023-34102900-ce72-11eb-8131-8db5dd609344.png)
