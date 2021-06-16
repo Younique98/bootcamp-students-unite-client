@@ -3,6 +3,7 @@ import { GroupProjectContext } from "./GroupProjectProvider.js";
 import { useHistory } from "react-router-dom";
 
 export const GroupProjectForm = (props) => {
+  // utilize history
   const history = useHistory();
   const {
     createGroupProject,
@@ -19,7 +20,7 @@ export const GroupProjectForm = (props) => {
     */
   const [currentGroupProject, setCurrentGroupProject] = useState({
     title: "",
-    numberOfGraduatesSignedUp: "",
+    numberOfGraduatesSignedUp: 1,
     description: "",
     estimatedTimeToCompletion: "",
     gitHubLink: "",
@@ -37,15 +38,17 @@ export const GroupProjectForm = (props) => {
       setCurrentGroupProject(selectedGroupProject);
     }
   };
-  console.log(currentGroupProject.participants?.length);
+
   /*
         Get groupProject types on initialization so that the <select>
         element presents groupProject type choices to the user.
     */
   useEffect(() => {
-    const projectId = parseInt(props.match.params.groupprojectId);
-    getGroupProjectById(projectId).then((res) => setCurrentGroupProject(res));
-    getGroupProjectInEditMode();
+    if (editMode) {
+      const projectId = parseInt(props.match.params.groupprojectId);
+      getGroupProjectById(projectId).then((res) => setCurrentGroupProject(res));
+      getGroupProjectInEditMode();
+    }
   }, []);
 
   /*
@@ -89,7 +92,6 @@ export const GroupProjectForm = (props) => {
   };
 
   const constructUpdateGroupProject = () => {
-    debugger;
     const groupProjectId = parseInt(currentGroupProject.id);
 
     // const number_of_graduates_signed_up = currentGroupProject.participants;
@@ -102,14 +104,14 @@ export const GroupProjectForm = (props) => {
       if (editMode) {
         // PUT
         updateGroupProject({
-          id: groupProjectState.id,
-          title: groupProjectState.title,
+          id: currentGroupProject.id,
+          title: currentGroupProject.title,
           numberOfGraduatesSignedUp: currentGroupProject.participants?.length,
-          date: groupProjectState.date,
-          description: groupProjectState.description,
-          gitHubLink: groupProjectState.github_link,
+          date: currentGroupProject.date,
+          description: currentGroupProject.description,
+          gitHubLink: currentGroupProject.github_link,
           estimatedTimeToCompletion:
-            groupProjectState.estimated_time_to_completion,
+            currentGroupProject.estimated_time_to_completion,
           project_manager: localStorage.getItem("bc_token"),
         }).then(() => props.history.push("/"));
       }
