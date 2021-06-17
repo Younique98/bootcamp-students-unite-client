@@ -6,6 +6,7 @@ import "./GroupProject.css";
 export const GroupProjectList = () => {
   const history = useHistory();
   const loggedInUser = +localStorage.getItem("id");
+  console.log(loggedInUser);
   const {
     groupProjects,
     getGroupProjects,
@@ -27,11 +28,12 @@ export const GroupProjectList = () => {
             history.push({ pathname: "/groupprojects/new" });
           }}
         >
-          Schedule New Group Project
+          Create New Group Project
         </button>
       </header>
-
+      {console.log(groupProjects)}
       {groupProjects.map((groupProject) => {
+        console.log(groupProject);
         let numberofstudents = groupProject.participants?.length;
         return (
           <section key={groupProject.id} className="registration">
@@ -40,7 +42,7 @@ export const GroupProjectList = () => {
             </div>
             <div>
               Number of Graduates Signed Up:
-              {numberofstudents}
+              {groupProject.number_of_graduates_signed_up}
             </div>
             <div>
               Description of the GroupProject: {groupProject.description}
@@ -53,8 +55,9 @@ export const GroupProjectList = () => {
               Project Manager: {groupProject.project_manager.user.first_name}
               {groupProject.project_manager.user.last_name}
             </div>
-            <div>Group Project GitHub Link: {groupProject.gitHubLink}</div>
+            <div>Group Project GitHub Link: {groupProject.github_link}</div>
             <div className="projectButtons">
+              {console.log(groupProject.participants.includes(loggedInUser))}
               {groupProject.participants.includes(loggedInUser) ? (
                 <button
                   className="btn btn-3"

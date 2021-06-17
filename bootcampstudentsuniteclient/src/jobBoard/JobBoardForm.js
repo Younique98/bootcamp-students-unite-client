@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { JobBoardContext } from "./JobBoardProvider.js";
 import { useHistory } from "react-router-dom";
+import "./JobBoard.css";
 
 export const JobBoardForm = (props) => {
   const history = useHistory();
@@ -154,7 +155,7 @@ export const JobBoardForm = (props) => {
         }}
         className="btn btn-primary"
       >
-        Create Project
+        Create Job
       </button>
 
       <button
