@@ -7,8 +7,7 @@
   padding-left: 80px;
 }
 
-.jobboards {
-  display: flex;
+.jobboardsection {
   flex-wrap: wrap;
   border: 2px solid lightblue;
   margin: 30px;
@@ -21,7 +20,6 @@
   /* float: left; */
   margin-left: 25%;
   width: 50%;
-  padding: 0 10px;
 }
 .individualJobBoards {
   border: 2px solid lightblue;
