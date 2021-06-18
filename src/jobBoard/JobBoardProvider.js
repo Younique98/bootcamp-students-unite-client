@@ -7,7 +7,7 @@ export const JobBoardProvider = (props) => {
   const [jobBoardTypes, setTypes] = useState([]);
 
   const getJobBoards = () => {
-    return fetch("http://localhost:8000/jobboard", {
+    return fetch("https://bootcamp-students-unite-api.herokuapp.com/jobboard", {
       headers: {
         Authorization: `Token ${localStorage.getItem("bc_token")}`,
       },
@@ -17,7 +17,7 @@ export const JobBoardProvider = (props) => {
   };
 
   const createJobBoard = (jobBoard) => {
-    return fetch("http://localhost:8000/jobboard", {
+    return fetch("https://bootcamp-students-unite-api.herokuapp.com/jobboard", {
       method: "POST",
       headers: {
         Authorization: `Token ${localStorage.getItem("bc_token")}`,
@@ -30,12 +30,15 @@ export const JobBoardProvider = (props) => {
   };
 
   const updateJobBoard = (jobboard) => {
-    return fetch(`http://localhost:8000/jobboard/${jobboard.id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("bc_token")}`,
-      },
-    })
+    return fetch(
+      `https://bootcamp-students-unite-api.herokuapp.com/jobboard/${jobboard.id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
+        },
+      }
+    )
       .then((response) => response.json())
       .then(getJobBoards);
   };

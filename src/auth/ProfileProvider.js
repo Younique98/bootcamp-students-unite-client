@@ -11,7 +11,7 @@ export const ProfileProvider = (props) => {
   const [profile, setProfile] = useState({ groupProjects: [] });
 
   const getProfile = () => {
-    return fetch("http://localhost:8000/profile", {
+    return fetch("https://bootcamp-students-unite-api.herokuapp.com/profile", {
       headers: {
         Authorization: `Token ${localStorage.getItem("bc_token")}`,
       },
@@ -21,7 +21,7 @@ export const ProfileProvider = (props) => {
   };
   const getUserById = (id) => {
     return fetch(
-      `http://localhost:8000/users/${id}?_expand=location&_expand=customer`
+      `https://bootcamp-students-unite-api.herokuapp.com/users/${id}?_expand=location&_expand=customer`
     ).then((res) => res.json());
   };
 

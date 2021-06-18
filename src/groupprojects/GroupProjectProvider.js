@@ -6,18 +6,21 @@ export const GroupProjectProvider = (props) => {
   const [groupProjects, setGroupProjects] = useState([]);
 
   const getGroupProjects = () => {
-    return fetch("http://localhost:8000/groupprojects", {
-      headers: {
-        Authorization: `Token ${localStorage.getItem("bc_token")}`,
-      },
-    })
+    return fetch(
+      "https://bootcamp-students-unite-api.herokuapp.com/groupprojects",
+      {
+        headers: {
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
+        },
+      }
+    )
       .then((response) => response.json())
       .then(setGroupProjects);
   };
 
   const leaveGroupProject = (groupProjectId) => {
     return fetch(
-      `http://localhost:8000/groupprojects/${groupProjectId}/signup`,
+      `https://bootcamp-students-unite-api.herokuapp.com/groupprojects/${groupProjectId}/signup`,
       {
         method: "DELETE",
         headers: {
@@ -28,19 +31,22 @@ export const GroupProjectProvider = (props) => {
   };
 
   const createGroupProject = (groupProject) => {
-    return fetch("http://localhost:8000/groupprojects", {
-      method: "POST",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("bc_token")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(groupProject),
-    }).then(getGroupProjects);
+    return fetch(
+      "https://bootcamp-students-unite-api.herokuapp.com/groupprojects",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(groupProject),
+      }
+    ).then(getGroupProjects);
   };
 
   const joinGroupProject = (groupProjectId) => {
     return fetch(
-      `http://localhost:8000/groupprojects/${groupProjectId}/signup`,
+      `https://bootcamp-students-unite-api.herokuapp.com/groupprojects/${groupProjectId}/signup`,
       {
         method: "POST",
         headers: {
@@ -51,31 +57,40 @@ export const GroupProjectProvider = (props) => {
   };
 
   const DeleteGroupProject = (projectId) => {
-    return fetch(`http://localhost:8000/groupprojects/${projectId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("bc_token")}`,
-      },
-    }).then(getGroupProjects);
+    return fetch(
+      `https://bootcamp-students-unite-api.herokuapp.com/groupprojects/${projectId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
+        },
+      }
+    ).then(getGroupProjects);
   };
 
   const updateGroupProject = (groupProject) => {
-    return fetch(`http://localhost:8000/groupprojects/${groupProject.id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("bc_token")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(groupProject),
-    }).then(getGroupProjects);
+    return fetch(
+      `https://bootcamp-students-unite-api.herokuapp.com/groupprojects/${groupProject.id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(groupProject),
+      }
+    ).then(getGroupProjects);
   };
 
   const getGroupProjectById = (id) => {
-    return fetch(`http://localhost:8000/groupprojects/${id}`, {
-      headers: {
-        Authorization: `Token ${localStorage.getItem("bc_token")}`,
-      },
-    }).then((res) => res.json());
+    return fetch(
+      `https://bootcamp-students-unite-api.herokuapp.com/groupprojects/${id}`,
+      {
+        headers: {
+          Authorization: `Token ${localStorage.getItem("bc_token")}`,
+        },
+      }
+    ).then((res) => res.json());
   };
 
   return (

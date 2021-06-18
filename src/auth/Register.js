@@ -26,15 +26,18 @@ export const Register = (props) => {
         uploadProfileImg: uploadProfileImg.current.files[0],
       };
 
-      return fetch("http://localhost:8000/register", {
-        method: "POST",
-        headers: {
-          Authorization: `Token ${localStorage.getItem("bc_token")}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(newUser),
-      })
+      return fetch(
+        "https://bootcamp-students-unite-api.herokuapp.com/register",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Token ${localStorage.getItem("bc_token")}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }
+      )
         .then((res) => res.json())
         .then((res) => {
           if ("token" in res) {
