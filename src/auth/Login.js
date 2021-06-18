@@ -10,7 +10,7 @@ export const Login = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    return fetch("http://localhost:8000/login", {
+    return fetch("https://bootcamp-students-unite-api.herokuapp.com/login", {
       method: "POST",
       headers: {
         Authorization: `Token ${localStorage.getItem("bc_token")}`,
